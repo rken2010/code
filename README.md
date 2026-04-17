@@ -2,6 +2,14 @@
 
 Base en **Python + FastAPI** para gestionar suministros, proveedores, agenda de contactos, expedientes, kanban, imports y KPIs.
 
+## Estructura recomendada (Windows)
+
+En la raíz del proyecto:
+
+- `install_windows.bat` → instala dependencias
+- `run_windows.bat` → arranca la API
+- `scripts/install_windows.bat` y `scripts/run_windows.bat` → wrappers de compatibilidad
+
 ## Cómo descargar y probar
 
 ### Opción A: Git
@@ -24,21 +32,20 @@ Abrí `http://127.0.0.1:8000/docs`.
 2. Descomprimir.
 3. Ejecutar los comandos anteriores.
 
-### Windows automático
+### Windows automático (recomendado)
+
+Desde la raíz del proyecto:
 
 ```bat
-# Lo podés ejecutar desde la raíz del proyecto o desde /scripts
-.\scripts\install_windows.bat
+.\install_windows.bat
+.\run_windows.bat
 ```
 
-El script detecta automáticamente la carpeta raíz del proyecto, así evita el error de instalación en `scripts/`.
+Compatibilidad (si estás dentro de `/scripts`):
 
-Si seguís viendo el error de `scripts does not appear to be a Python project`, verificá que imprimió:
-- `[INFO] Proyecto detectado en: <ruta_de_tu_repo>`
-
-Si no aparece, ejecutá el script desde la raíz del repo con:
 ```bat
-.\scripts\install_windows.bat
+.\install_windows.bat
+.\run_windows.bat
 ```
 
 ## Seguridad básica (roles)

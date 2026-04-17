@@ -2,10 +2,10 @@
 setlocal
 
 REM Wrapper para mantener compatibilidad si alguien ejecuta desde /scripts
-set "ROOT_SCRIPT=%~dp0..\install_windows.bat"
+set "ROOT_SCRIPT=%~dp0..\run_windows.bat"
 
 if not exist "%ROOT_SCRIPT%" (
-  echo [ERROR] No se encontro install_windows.bat en la raiz del proyecto.
+  echo [ERROR] No se encontro run_windows.bat en la raiz del proyecto.
   exit /b 1
 )
 
