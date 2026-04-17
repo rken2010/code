@@ -27,8 +27,11 @@ Abrí `http://127.0.0.1:8000/docs`.
 ### Windows automático
 
 ```bat
-scripts\install_windows.bat
+# Lo podés ejecutar desde la raíz del proyecto o desde /scripts
+.\scripts\install_windows.bat
 ```
+
+El script detecta automáticamente la carpeta raíz del proyecto, así evita el error de instalación en `scripts/`.
 
 ## Seguridad básica (roles)
 
