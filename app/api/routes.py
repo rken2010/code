@@ -1,14 +1,18 @@
 from datetime import datetime
+from pathlib import Path
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile
 from sqlmodel import Session, select
 
 from app.db.session import get_session
-from app.models.supply import Provider, Supply, SupplyItem, SupplyTransition
+from app.models.supply import Memo, Provider, Supply, SupplyItem, SupplyTransition
 from app.schemas.supply import (
     AlertItem,
     BudgetSummaryItem,
     DashboardKpi,
+    FileUploadResponse,
+    MemoCreate,
+    MemoRead,
     ProviderCreate,
     ProviderRead,
     SupplyCreate,
@@ -20,6 +24,12 @@ from app.schemas.supply import (
 )
 from app.services.budget import get_budget_summary
 from app.services.dashboard import get_dashboard_kpis, get_stale_alerts
+from app.services.files import (
+    base_storage_dir,
+    memo_folder_name,
+    save_upload_to_folder,
+    supply_folder_name,
+)
 
 router = APIRouter()
 
@@ -36,6 +46,20 @@ def create_provider(payload: ProviderCreate, session: Session = Depends(get_sess
 @router.get("/providers", response_model=list[ProviderRead])
 def list_providers(session: Session = Depends(get_session)) -> list[Provider]:
     return list(session.exec(select(Provider).order_by(Provider.business_name)).all())
+
+
+@router.post("/memos", response_model=MemoRead, status_code=201)
+def create_memo(payload: MemoCreate, session: Session = Depends(get_session)) -> Memo:
+    memo = Memo(**payload.model_dump())
+    session.add(memo)
+    session.commit()
+    session.refresh(memo)
+    return memo
+
+
+@router.get("/memos", response_model=list[MemoRead])
+def list_memos(session: Session = Depends(get_session)) -> list[Memo]:
+    return list(session.exec(select(Memo).order_by(Memo.id.desc())).all())
 
 
 @router.post("/supplies", response_model=SupplyRead, status_code=201)
@@ -114,6 +138,38 @@ def transition_supply(
     session.commit()
     session.refresh(transition)
     return transition
+
+
+@router.post("/supplies/{supply_id}/files", response_model=FileUploadResponse, status_code=201)
+def upload_supply_file(
+    supply_id: int,
+    file: UploadFile = File(...),
+    session: Session = Depends(get_session),
+) -> FileUploadResponse:
+    supply = session.get(Supply, supply_id)
+    if not supply:
+        raise HTTPException(status_code=404, detail="Suministro no encontrado")
+
+    folder = base_storage_dir() / "suministros" / Path(supply_folder_name(supply.id, supply.description))
+    stored_path = save_upload_to_folder(folder=folder, uploaded_file=file)
+
+    return FileUploadResponse(message="Archivo guardado", path=stored_path)
+
+
+@router.post("/memos/{memo_id}/files", response_model=FileUploadResponse, status_code=201)
+def upload_memo_file(
+    memo_id: int,
+    file: UploadFile = File(...),
+    session: Session = Depends(get_session),
+) -> FileUploadResponse:
+    memo = session.get(Memo, memo_id)
+    if not memo:
+        raise HTTPException(status_code=404, detail="Memo no encontrado")
+
+    folder = base_storage_dir() / "memos" / Path(memo_folder_name(memo.number, memo.description))
+    stored_path = save_upload_to_folder(folder=folder, uploaded_file=file)
+
+    return FileUploadResponse(message="Archivo guardado", path=stored_path)
 
 
 @router.get("/budget/summary", response_model=list[BudgetSummaryItem])

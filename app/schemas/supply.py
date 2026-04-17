@@ -24,6 +24,27 @@ class ProviderRead(BaseModel):
     created_at: datetime
 
 
+class MemoCreate(BaseModel):
+    number: str = Field(min_length=1)
+    description: str = Field(min_length=2)
+    office: Optional[str] = None
+    office_since: Optional[date] = None
+
+
+class MemoRead(BaseModel):
+    id: int
+    number: str
+    description: str
+    office: Optional[str]
+    office_since: Optional[date]
+    created_at: datetime
+
+
+class FileUploadResponse(BaseModel):
+    message: str
+    path: str
+
+
 class SupplyCreate(BaseModel):
     date: date
     requester_dependency: str = Field(min_length=2)

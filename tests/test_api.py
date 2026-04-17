@@ -7,6 +7,7 @@ from app.db import session as session_module
 from app.db.session import get_session
 from app.main import app
 from app.models.supply import Supply
+from app.services.files import memo_folder_name, supply_folder_name
 
 
 def test_supply_flow_budget_and_dashboard():
@@ -109,3 +110,14 @@ def test_alerts_for_stale_supply():
     assert alerts.status_code == 200
     assert len(alerts.json()) == 1
     assert alerts.json()[0]["title"] == "Insumos médicos"
+
+
+def test_folder_naming_rules():
+    supply_folder = supply_folder_name(15, "Compra de tornillos / herramientas")
+    memo_folder = memo_folder_name("4079-23", "Nota: envío urgente")
+
+    assert supply_folder.startswith("Suministro N° 15 - ")
+    assert "/" not in supply_folder
+
+    assert memo_folder.startswith("Memo N° 4079-23 - ")
+    assert ":" not in memo_folder

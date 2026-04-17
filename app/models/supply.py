@@ -70,3 +70,12 @@ class SupplyTransition(SQLModel, table=True):
     notes: Optional[str] = None
 
     created_at: datetime = Field(default_factory=datetime.utcnow, nullable=False)
+
+
+class Memo(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    number: str = Field(index=True)
+    description: str
+    office: Optional[str] = None
+    office_since: Optional[date] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow, nullable=False)
