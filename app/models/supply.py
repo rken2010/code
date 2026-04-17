@@ -18,9 +18,20 @@ class SupplyStage(StrEnum):
     CLOSED = "closed"
 
 
+class Provider(SQLModel, table=True):
+    id: Optional[int] = Field(default=None, primary_key=True)
+    business_name: str = Field(index=True)
+    tax_id: Optional[str] = Field(default=None, index=True)
+    email: Optional[str] = None
+    phone: Optional[str] = None
+    contact_name: Optional[str] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow, nullable=False)
+
+
 class Supply(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     created_at: datetime = Field(default_factory=datetime.utcnow, nullable=False)
+    updated_at: datetime = Field(default_factory=datetime.utcnow, nullable=False)
 
     date: date
     requester_dependency: str
@@ -29,6 +40,7 @@ class Supply(SQLModel, table=True):
     title: str
     description: Optional[str] = None
     current_stage: SupplyStage = Field(default=SupplyStage.BUDGET)
+    provider_id: Optional[int] = Field(default=None, foreign_key="provider.id", index=True)
 
 
 class SupplyItem(SQLModel, table=True):

@@ -1,9 +1,9 @@
 [project]
 name = "rafam-workflow"
-version = "0.1.0"
+version = "0.2.0"
 description = "Base app para gestionar flujo de suministros y presupuesto"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 dependencies = [
   "fastapi>=0.115.0",
   "uvicorn[standard]>=0.30.0",
@@ -18,7 +18,7 @@ dev = [
 ]
 
 [build-system]
-requires = ["setuptools>=68", "wheel"]
+requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.pytest.ini_options]

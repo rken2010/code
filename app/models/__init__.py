@@ -1,1 +1,1 @@
-from app.models.supply import Supply, SupplyItem, SupplyTransition
+from app.models.supply import Provider, Supply, SupplyItem, SupplyTransition

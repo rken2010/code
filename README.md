@@ -1,42 +1,48 @@
 # RAFAM Workflow (Base)
 
-Base en **Python + FastAPI** para gestionar flujo de suministros/compras y estado presupuestario por partida.
+Base en **Python + FastAPI** para gestionar flujo de suministros/compras, proveedores y KPIs operativos.
 
-## Requisitos
+## Cómo descargar y probar
 
-- Python 3.11+
-
-## Instalación
+### Opción A: con Git
 
 ```bash
+git clone <URL_DEL_REPO>
+cd code
 python -m venv .venv
 source .venv/bin/activate
 pip install -e .[dev]
-```
-
-## Ejecutar
-
-```bash
 uvicorn app.main:app --reload
 ```
 
-Documentación:
-- Swagger: `http://127.0.0.1:8000/docs`
+Abrí: `http://127.0.0.1:8000/docs`
+
+### Opción B: ZIP
+
+1. Descargar el repositorio en ZIP desde tu hosting Git.
+2. Descomprimir.
+3. Entrar a la carpeta del proyecto.
+4. Ejecutar los mismos pasos de entorno virtual e instalación.
 
 ## Endpoints MVP
 
 - `GET /health`
+- `POST /providers` crear proveedor
+- `GET /providers` listar proveedores
 - `POST /supplies` crear suministro
 - `GET /supplies` listar suministros
 - `GET /supplies/{supply_id}` detalle
 - `POST /supplies/{supply_id}/items` agregar ítem
 - `POST /supplies/{supply_id}/transitions` mover etapa
 - `GET /budget/summary` resumen por partida (3 primeros niveles, ej. `2.9.6`)
+- `GET /dashboard/kpis` KPIs de gestión
+- `GET /dashboard/alerts` alertas por falta de movimiento
 
-## Nota
+## Mejoras sugeridas (siguiente sprint)
 
-Este MVP se centra en el núcleo del flujo. Se puede extender con:
-- OCR de PDF/imagen
-- Proveedores/agenda
-- Expedientes/memos
-- Kanban y recordatorios
+1. Importación de PDF/Excel con mapeo de columnas y validaciones.
+2. Agenda de contacto por proveedor con historial de compras.
+3. Módulo de expedientes/memos con ubicación por oficina y fecha.
+4. Kanban con tareas vinculadas a suministros y expedientes.
+5. Roles y permisos + auditoría completa.
+6. Dashboard visual con gráficos y filtros por secretaría/dependencia.
