@@ -33,6 +33,14 @@ Abrí `http://127.0.0.1:8000/docs`.
 
 El script detecta automáticamente la carpeta raíz del proyecto, así evita el error de instalación en `scripts/`.
 
+Si seguís viendo el error de `scripts does not appear to be a Python project`, verificá que imprimió:
+- `[INFO] Proyecto detectado en: <ruta_de_tu_repo>`
+
+Si no aparece, ejecutá el script desde la raíz del repo con:
+```bat
+.\scripts\install_windows.bat
+```
+
 ## Seguridad básica (roles)
 
 Los endpoints de escritura requieren headers:
