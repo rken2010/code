@@ -28,6 +28,9 @@ Abrí `http://127.0.0.1:8000/` para la app web.
 
 API/Swagger: `http://127.0.0.1:8000/docs`.
 
+La UI web en `/` permite operar módulos base (Dashboard, Proveedores, Suministros, Memos y Tareas) usando los headers `X-User` y `X-Role` configurables en la barra superior.
+
+
 ### Opción B: ZIP
 
 1. Descargar ZIP del repo.

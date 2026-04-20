@@ -2,6 +2,7 @@
   color-scheme: light;
   font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
 }
+* { box-sizing: border-box; }
 body {
   margin: 0;
   background: #f4f6fb;
@@ -12,18 +13,16 @@ body {
   color: #fff;
   padding: 16px 24px;
   display: flex;
+  gap: 16px;
   align-items: center;
   justify-content: space-between;
 }
-.docs-link {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.2);
-  padding: 8px 12px;
-  border-radius: 8px;
-  text-decoration: none;
-}
+.auth-box { display: flex; gap: 8px; }
+.auth-box input,
+.auth-box select { padding: 8px; border-radius: 8px; border: none; }
+
 .container {
-  max-width: 980px;
+  max-width: 1200px;
   margin: 24px auto;
   padding: 0 16px;
   display: grid;
@@ -35,8 +34,46 @@ body {
   padding: 18px;
   box-shadow: 0 6px 20px rgba(20, 35, 90, 0.08);
 }
-ul {
-  margin: 0;
-  padding-left: 18px;
+.two-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
-a { color: #244bb3; }
+@media (max-width: 900px) {
+  .two-cols { grid-template-columns: 1fr; }
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.kpi-grid div {
+  border: 1px solid #e5e9f8;
+  border-radius: 10px;
+  padding: 8px;
+  display: grid;
+}
+.kpi-grid span { font-size: 12px; color: #5f6891; }
+.kpi-grid strong { font-size: 24px; }
+
+form {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+input, select, button {
+  padding: 9px;
+  border-radius: 8px;
+  border: 1px solid #c8d0ef;
+}
+button {
+  border: none;
+  background: #244bb3;
+  color: #fff;
+  cursor: pointer;
+}
+ul { margin: 0; padding-left: 18px; }
+li { margin-bottom: 6px; }
+.helper { color: #4f5681; font-size: 12px; }

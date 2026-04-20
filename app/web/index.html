@@ -9,28 +9,85 @@
   <body>
     <header class="topbar">
       <h1>RAFAM Workflow</h1>
-      <a class="docs-link" href="/docs" target="_blank" rel="noreferrer">API Docs</a>
+      <div class="auth-box">
+        <input id="xUser" placeholder="X-User" value="admin-demo" />
+        <select id="xRole">
+          <option value="admin">admin</option>
+          <option value="compras">compras</option>
+          <option value="tesoreria">tesoreria</option>
+          <option value="lectura">lectura</option>
+        </select>
+      </div>
     </header>
 
     <main class="container">
       <section class="card">
-        <h2>Estado del sistema</h2>
-        <p id="health">Consultando...</p>
+        <h2>Dashboard</h2>
+        <div class="kpi-grid">
+          <div><span>Total</span><strong id="kpiTotal">-</strong></div>
+          <div><span>Abiertos</span><strong id="kpiOpen">-</strong></div>
+          <div><span>Cerrados</span><strong id="kpiClosed">-</strong></div>
+          <div><span>Demorados</span><strong id="kpiOverdue">-</strong></div>
+        </div>
+        <button id="btnRefreshKpi">Refrescar KPIs</button>
+      </section>
+
+      <section class="card two-cols">
+        <div>
+          <h2>Proveedores</h2>
+          <form id="providerForm">
+            <input name="business_name" placeholder="Razón social" required />
+            <input name="tax_id" placeholder="CUIT" />
+            <input name="email" placeholder="Email" />
+            <button type="submit">Crear proveedor</button>
+          </form>
+          <ul id="providerList"></ul>
+        </div>
+
+        <div>
+          <h2>Suministros</h2>
+          <form id="supplyForm">
+            <input name="date" type="date" required />
+            <input name="requester_dependency" placeholder="Dependencia" required />
+            <input name="executing_unit" placeholder="Unidad ejecutora" required />
+            <input name="title" placeholder="Título" required />
+            <input name="description" placeholder="Observación" />
+            <input name="provider_id" placeholder="ID proveedor (opcional)" type="number" />
+            <button type="submit">Crear suministro</button>
+          </form>
+          <ul id="supplyList"></ul>
+        </div>
+      </section>
+
+      <section class="card two-cols">
+        <div>
+          <h2>Memos</h2>
+          <form id="memoForm">
+            <input name="number" placeholder="Número" required />
+            <input name="description" placeholder="Descripción" required />
+            <input name="office" placeholder="Oficina" />
+            <button type="submit">Crear memo</button>
+          </form>
+          <ul id="memoList"></ul>
+        </div>
+
+        <div>
+          <h2>Tareas (Kanban)</h2>
+          <form id="taskForm">
+            <input name="title" placeholder="Título" required />
+            <input name="description" placeholder="Descripción" />
+            <input name="due_date" type="date" />
+            <input name="supply_id" type="number" placeholder="ID suministro" />
+            <input name="expediente_id" type="number" placeholder="ID expediente" />
+            <button type="submit">Crear tarea</button>
+          </form>
+          <ul id="taskList"></ul>
+        </div>
       </section>
 
       <section class="card">
-        <h2>Accesos rápidos</h2>
-        <ul>
-          <li><a href="/docs#/default/post_providers_providers_post" target="_blank">Crear proveedor</a></li>
-          <li><a href="/docs#/default/post_supplies_supplies_post" target="_blank">Crear suministro</a></li>
-          <li><a href="/docs#/default/get_budget_summary_budget_summary_get" target="_blank">Ver presupuesto</a></li>
-          <li><a href="/docs#/default/get_dashboard_kpis_dashboard_kpis_get" target="_blank">Ver KPIs</a></li>
-        </ul>
-      </section>
-
-      <section class="card">
-        <h2>Nota</h2>
-        <p>Esta es la pantalla inicial de la app. El backend/API sigue disponible en <code>/docs</code>.</p>
+        <h2>Links útiles</h2>
+        <a href="/docs" target="_blank" rel="noreferrer">Abrir Swagger</a>
       </section>
     </main>
 
