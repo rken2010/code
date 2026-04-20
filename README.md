@@ -26,6 +26,8 @@ uvicorn app.main:app --reload
 
 Abrí `http://127.0.0.1:8000/docs`.
 
+Tip: `GET /` redirige automáticamente a `/docs` para evitar el 404 inicial en navegador.
+
 ### Opción B: ZIP
 
 1. Descargar ZIP del repo.
