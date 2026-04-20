@@ -26,13 +26,22 @@ if not exist .venv (
 )
 
 echo [INFO] Actualizando pip...
-python -m pip install --upgrade pip
+.venv\Scripts\python -m pip install --upgrade pip
 
 echo [INFO] Instalando dependencias del proyecto...
-python -m pip install -e .[dev]
+.venv\Scripts\python -m pip install -e .
+.venv\Scripts\python -m pip install -e .[dev]
 
 if errorlevel 1 (
   echo [ERROR] Fallo la instalacion de dependencias.
+  popd >nul
+  exit /b 1
+)
+
+.venv\Scripts\python -c "import uvicorn" >nul 2>&1
+if errorlevel 1 (
+  echo [ERROR] Uvicorn no quedo instalado correctamente.
+  echo [ERROR] Ejecuta manualmente: .venv\Scripts\python -m pip install uvicorn[standard]
   popd >nul
   exit /b 1
 )

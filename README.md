@@ -48,6 +48,13 @@ Compatibilidad (si estás dentro de `/scripts`):
 .\run_windows.bat
 ```
 
+Si aparece el error `No module named uvicorn`, corré nuevamente:
+```bat
+.\install_windows.bat
+```
+
+`run_windows.bat` también intenta reparar automáticamente instalando `uvicorn` si falta.
+
 ## Seguridad básica (roles)
 
 Los endpoints de escritura requieren headers:
