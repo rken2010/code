@@ -24,9 +24,9 @@ python -m pip install -e .[dev]
 uvicorn app.main:app --reload
 ```
 
-Abrí `http://127.0.0.1:8000/docs`.
+Abrí `http://127.0.0.1:8000/` para la app web.
 
-Tip: `GET /` redirige automáticamente a `/docs` para evitar el 404 inicial en navegador.
+API/Swagger: `http://127.0.0.1:8000/docs`.
 
 ### Opción B: ZIP
 

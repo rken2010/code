@@ -132,3 +132,10 @@ def test_folder_naming_and_mapping_rules():
 
     assert mapping["código"] == "code"
     assert mapping["cantidad"] == "quantity"
+
+
+def test_root_serves_web_app():
+    client = TestClient(app)
+    response = client.get("/")
+    assert response.status_code == 200
+    assert "RAFAM Workflow" in response.text

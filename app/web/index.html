@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RAFAM Workflow App</title>
+    <link rel="stylesheet" href="/web/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>RAFAM Workflow</h1>
+      <a class="docs-link" href="/docs" target="_blank" rel="noreferrer">API Docs</a>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <h2>Estado del sistema</h2>
+        <p id="health">Consultando...</p>
+      </section>
+
+      <section class="card">
+        <h2>Accesos rápidos</h2>
+        <ul>
+          <li><a href="/docs#/default/post_providers_providers_post" target="_blank">Crear proveedor</a></li>
+          <li><a href="/docs#/default/post_supplies_supplies_post" target="_blank">Crear suministro</a></li>
+          <li><a href="/docs#/default/get_budget_summary_budget_summary_get" target="_blank">Ver presupuesto</a></li>
+          <li><a href="/docs#/default/get_dashboard_kpis_dashboard_kpis_get" target="_blank">Ver KPIs</a></li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Nota</h2>
+        <p>Esta es la pantalla inicial de la app. El backend/API sigue disponible en <code>/docs</code>.</p>
+      </section>
+    </main>
+
+    <script src="/web/app.js"></script>
+  </body>
+</html>
